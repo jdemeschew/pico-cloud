@@ -1,0 +1,44 @@
+package de.tinysite.pico.cloud.deployers.impl;
+
+import de.tinysite.pico.cloud.delegates.DeployInstanceDelegate;
+import de.tinysite.pico.cloud.deployers.Deployer;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+//@Component
+public class FileSystemDeployer implements Deployer {
+    Logger logger = LoggerFactory.getLogger(FileSystemDeployer.class);
+    @Value("${pico-site.structure.template.location}")
+    private String picoTemplateLocation="";
+    @Value("${pico-site.config-file.template.location}")
+    private String picoConfigFileTemplateLocation="";
+    @Value("${htdocs.location}")
+    private String htdocsLocation="";
+    @Value("${local-pico-cloud.base-url}")
+    private String  baseUrl;
+
+
+
+    @Override
+    public Path deploy(String siteName, String fileLocation) {
+        String siteUrl =baseUrl+siteName;
+        Path sourcePath = Paths.get(picoTemplateLocation);
+        Path targetPath=Paths.get(htdocsLocation,siteName);
+        try {
+            FileUtils.deleteDirectory(targetPath.toFile());
+            FileUtils.copyDirectory(sourcePath.toFile(),targetPath.toFile());
+            System.out.println(String.format("Your Pico site has been deployed and can be reached under: %s",siteUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+System.out.println("Deployment complete");
+return null;
+
+}}
