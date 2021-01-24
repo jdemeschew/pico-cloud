@@ -177,7 +177,7 @@
           <target>8</target>
         </configuration>
       </plugin>
-      <!--plugin>
+      <plugin>
         <groupId>io.swagger</groupId>
         <artifactId>swagger-codegen-maven-plugin</artifactId>
         <version>2.3.1</version>
@@ -187,8 +187,8 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>/Users/void/projects/pico-cloud/src/main/resouces/plesk.json</inputSpec>
-              <output>/Users/void/projects/pico-cloud/</output>
+              <inputSpec>${project.basedir}/src/main/resources/plesk.json</inputSpec>
+              <output>${project.basedir}</output>
               <language>java</language>
               <library>resttemplate</library>
                 <apiPackage>de.tinysite.flufl.plesk.rest.api</apiPackage>
@@ -203,7 +203,7 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>-->
+      </plugin>
     </plugins>
   </build>
 </project>
