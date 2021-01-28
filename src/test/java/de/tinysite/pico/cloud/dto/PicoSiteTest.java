@@ -10,14 +10,14 @@ class PicoSiteTest {
     public void testSiteTitleGetterAndSetter(){
         PicoSite picoSite =new PicoSite();
         picoSite.setSiteTitle("a+b");
-        assertEquals("a b",picoSite.getSiteTitle());
+        assertEquals("a b",picoSite.getSiteTitle(),"space in site title should be replaced with +");
 
     }
     @Test
     public void testuserFullNameGetterAndSetter(){
         PicoSite picoSite =new PicoSite();
         picoSite.setUserFullName("John+Doe");
-        assertEquals("John Doe",picoSite.getUserFullName());
+        assertEquals("John Doe",picoSite.getUserFullName(), "space in site title should be replaced with +");
 
     }
 

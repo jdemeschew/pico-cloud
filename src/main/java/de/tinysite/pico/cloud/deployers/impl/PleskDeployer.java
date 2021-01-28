@@ -46,11 +46,9 @@ public class PleskDeployer implements Deployer {
         DomainRequestHostingSettings domainSettings =new DomainRequestHostingSettings();
         domainRequest.setHostingType(DomainRequest.HostingTypeEnum.VIRTUAL);
         domainRequest.setHostingSettings(domainSettings);
-        logger.info("deploy site:"+siteName);
+        logger.info("deploy site:{}",siteName);
         CreatedResponse response =domainsApi.domainsPost(domainRequest);
         DomainResponse newDomain = domainsApi.domainsIdGet(response.getId());
-        logger.info("subdomain created");
-        System.out.println(picoTemplateLocation);
         return Paths.get(newDomain.getWwwRoot());
 
 

@@ -29,7 +29,7 @@ Plesk specific implementation of the PicoProvisioning Service
  **/
 public class PicoProvisioningServiceImpl implements PicoProvisioningService {
 
-    Logger logger = LoggerFactory.getLogger(DeployInstanceDelegate.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeployInstanceDelegate.class);
     private static PicoProvisioningService provisioningService;
 
 
@@ -47,6 +47,7 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
 
     @Value("${pico-site.config-file.template.location}")
     private String picoConfigFileTemplateLocation="";
+    @Value("${pico-site.config-file.template.location}")
 
     public String getPicoSiteTargetLocation() {
         return picoSiteTargetLocation;
@@ -69,7 +70,7 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
     public void setPicoSiteTargetLocation(String picoSiteTargetLocation) {
         this.picoSiteTargetLocation = picoSiteTargetLocation;
     }
-
+@Override
     public void deploy(PicoSite picoSite, String instanceName)  {
 
         Path source =Paths.get(picoTemplateLocation);
@@ -95,7 +96,7 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
 
             picoMailService.send(picoSite.getUserEmail(), "your Pico Site", content);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error sending mail:{}", e.getMessage());
         }
     }
 
