@@ -124,7 +124,6 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
             FileUtils.writeStringToFile((instanceConfigFile.toFile()),result,StandardCharsets.UTF_8,false);
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

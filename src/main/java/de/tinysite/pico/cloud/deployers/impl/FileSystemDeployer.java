@@ -34,7 +34,6 @@ public class FileSystemDeployer implements Deployer {
             FileUtils.copyDirectory(sourcePath.toFile(),targetPath.toFile());
             System.out.println(String.format("Your Pico site has been deployed and can be reached under: %s",siteUrl));
         } catch (IOException e) {
-            e.printStackTrace();
         }
 System.out.println("Deployment complete");
 return null;
