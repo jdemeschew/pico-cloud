@@ -1,12 +1,10 @@
 package de.tinysite.pico.cloud.deployers.impl;
 
-import de.tinysite.pico.cloud.delegates.DeployInstanceDelegate;
 import de.tinysite.pico.cloud.deployers.Deployer;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -2,7 +2,6 @@ package de.tinysite.pico.cloud.services;
 
 import de.tinysite.pico.cloud.dto.PicoSite;
 
-import java.io.IOException;
 import java.util.Map;
 
 public interface PicoProvisioningService {
