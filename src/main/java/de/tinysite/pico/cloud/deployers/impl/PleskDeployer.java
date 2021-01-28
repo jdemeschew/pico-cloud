@@ -21,8 +21,6 @@ Implementation of the  Deployer interface using Plesk REST API
  */
 //@Component
 public class PleskDeployer implements Deployer {
-    @Value("${pico-site.structure.template.location}")
-    private String picoTemplateLocation = "";
     @Autowired
     DomainsApi domainsApi;
      private Logger logger = LoggerFactory.getLogger(PleskDeployer.class);

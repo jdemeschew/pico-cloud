@@ -30,7 +30,6 @@ Plesk specific implementation of the PicoProvisioning Service
 public class PicoProvisioningServiceImpl implements PicoProvisioningService {
 
     private static final Logger logger = LoggerFactory.getLogger(DeployInstanceDelegate.class);
-    private static PicoProvisioningService provisioningService;
 
 
     public final String PICO_WELCOME_EMAIL ="Hello %s, here is the link to your site:\n" +"%s";
