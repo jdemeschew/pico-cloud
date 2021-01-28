@@ -23,7 +23,9 @@ build
 /.swagger-codegen
 /docs
 /gradle
-# *.java
 
 !src/main/java/de/tinysite/flufl/plesk/rest/dto/DomainResponse.java
 !src/main/java/de/tinysite/flufl/plesk/rest/api/DomainsApi.java
+src/main/java/de/tinysite/flufl/plesk/rest/dto/*.java
+src/main/java/de/tinysite/flufl/plesk/rest/api/*.java
+
