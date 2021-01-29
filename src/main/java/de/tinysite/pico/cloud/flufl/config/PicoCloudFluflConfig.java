@@ -4,7 +4,7 @@ import de.tinysite.flufl.plesk.rest.api.DomainsApi;
 import de.tinysite.pico.cloud.delegates.DeployInstanceDelegate;
 import de.tinysite.pico.cloud.deployers.Deployer;
 import de.tinysite.pico.cloud.deployers.impl.DummyDeployer;
-import de.tinysite.pico.cloud.deployers.impl.FileSystemDeployer;
+import de.tinysite.pico.cloud.deployers.impl.LocalHostDeployer;
 import de.tinysite.pico.cloud.deployers.impl.PleskDeployer;
 import de.tinysite.pico.cloud.services.PicoMailService;
 import de.tinysite.pico.cloud.services.PicoProvisioningService;
@@ -22,10 +22,10 @@ public class PicoCloudFluflConfig {
     Deployer pleskDeployer(){
         return new PleskDeployer();
     }
-    @ConditionalOnProperty(name="cloud.deployer",havingValue="file-system")
+    @ConditionalOnProperty(name="cloud.deployer",havingValue="local")
     @Bean
-    Deployer fileSystemDeployer(){
-        return new FileSystemDeployer();
+    Deployer localhostDeployer(){
+        return new LocalHostDeployer();
     }
     @ConditionalOnProperty(name="cloud.deployer",havingValue="dummy")
     //@Bean

@@ -11,8 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 //@Component
-public class FileSystemDeployer implements Deployer {
-    Logger logger = LoggerFactory.getLogger(FileSystemDeployer.class);
+public class LocalHostDeployer implements Deployer {
+    Logger logger = LoggerFactory.getLogger(LocalHostDeployer.class);
     @Value("${pico-site.structure.template.location}")
     private String picoTemplateLocation="";
 
@@ -20,6 +20,8 @@ public class FileSystemDeployer implements Deployer {
     private String htdocsLocation="";
     @Value("${local-pico-cloud.base-url}")
     private String  baseUrl;
+    @Value("${localhost.base-url}")
+    private String localhostBaseUrl;
 
 
 
@@ -33,6 +35,7 @@ public class FileSystemDeployer implements Deployer {
             FileUtils.copyDirectory(sourcePath.toFile(),targetPath.toFile());
             logger.info("Pico site has been deployed and can be reached under: %s",siteUrl);
         } catch (IOException e) {
+            logger.error("could not deploy site{} ",siteName);
         }
 logger.info("Deployment complete");
 return targetPath;
