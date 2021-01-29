@@ -35,6 +35,6 @@ public class FileSystemDeployer implements Deployer {
         } catch (IOException e) {
         }
 logger.info("Deployment complete");
-return null;
+return targetPath;
 
 }}

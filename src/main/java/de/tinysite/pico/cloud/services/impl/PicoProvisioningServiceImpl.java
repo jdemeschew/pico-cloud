@@ -24,9 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-/**
-Plesk specific implementation of the PicoProvisioning Service
- **/
 public class PicoProvisioningServiceImpl implements PicoProvisioningService {
 
     private static final Logger logger = LoggerFactory.getLogger(DeployInstanceDelegate.class);
@@ -46,7 +43,6 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
 
     @Value("${pico-site.config-file.template.location}")
     private String picoConfigFileTemplateLocation="";
-    @Value("${pico-site.config-file.template.location}")
 
     public String getPicoSiteTargetLocation() {
         return picoSiteTargetLocation;
@@ -77,20 +73,22 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
         processEngine.getRuntimeService();
         try {
             String  siteName = picoSite.getSiteName();
-            Path subDomain = deployer.deploy(siteName,"");
-            if(subDomain ==null){
+            Path sitePath = deployer.deploy(siteName,"");
+
+
+            if(sitePath ==null){
                 return;
             }
-           Path parentPath =  subDomain.getParent();
+           Path parentPath =  sitePath.getParent();
 
 
-            FileUtils.deleteDirectory(subDomain.toFile());
-            FileUtils.copyDirectory(source.toFile(),subDomain.toFile());
+            FileUtils.deleteDirectory(sitePath.toFile());
+            FileUtils.copyDirectory(source.toFile(),sitePath.toFile());
             Map<String,String>  params= new HashMap();
             params.put("site_title", picoSite.getSiteTitle());
-            configureInstance(subDomain.toString(),params);
+            configureInstance(sitePath.toString(),params);
             String link ="https://" + siteName+".tinysite.de";
-            configureInstance(subDomain.toFile().getAbsolutePath(),params);
+            configureInstance(sitePath.toFile().getAbsolutePath(),params);
             String content = String.format(PICO_WELCOME_EMAIL,picoSite.getUserFullName(),link);
 
             picoMailService.send(picoSite.getUserEmail(), "your Pico Site", content);
