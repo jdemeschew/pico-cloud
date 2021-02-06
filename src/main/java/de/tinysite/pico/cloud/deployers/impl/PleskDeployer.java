@@ -24,7 +24,7 @@ public class PleskDeployer implements Deployer {
     @Autowired
     DomainsApi domainsApi;
      private Logger logger = LoggerFactory.getLogger(PleskDeployer.class);
-     @Value("${plesk-api.base.path}")
+     @Value("${plesk-api.base.path:}")
     private String  basePath="";
 
     @Override

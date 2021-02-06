@@ -18,24 +18,24 @@ public class LocalHostDeployer implements Deployer {
 
     @Value("${htdocs.location}")
     private String htdocsLocation="";
-    @Value("${local-pico-cloud.base-url}")
-    private String  baseUrl;
+    @Value("${local-pico-cloud.base-url:}")
+    private String  baseUrl="";
     @Value("${localhost.base-url}")
-    private String localhostBaseUrl;
+    private String localhostBaseUrl="";
 
 
 
     @Override
     public Path deploy(String siteName, String fileLocation) {
-        String siteUrl =baseUrl+siteName;
+        String siteUrl =localhostBaseUrl+"/"+siteName;
         Path sourcePath = Paths.get(picoTemplateLocation);
         Path targetPath=Paths.get(htdocsLocation,siteName);
         try {
             FileUtils.deleteDirectory(targetPath.toFile());
             FileUtils.copyDirectory(sourcePath.toFile(),targetPath.toFile());
-            logger.info("Pico site has been deployed and can be reached under: %s",siteUrl);
+            System.out.println(String.format("Pico site has been deployed and can be reached under: %s",siteUrl));
         } catch (IOException e) {
-            logger.error("could not deploy site{} ",siteName);
+            logger.error("could not deploy site {}",siteName);
         }
 logger.info("Deployment complete");
 return targetPath;

@@ -8,23 +8,23 @@ public class PicoSite {
     /*
     Site name which will be used as subdomain name
      */
-    private String siteName="foobar";
+    private String siteName="";
     /*
     Site title, will be used as  Header of the Pico site
      */
-    private String siteTitle;
+    private String siteTitle="";
     /*
     User name,used on Pico site, eg as reciever name if sending mails to the user
      */
-    private String userFullName;
+    private String userFullName="";
     /**
      * User password
      */
-    private String userPassword;
+    private String userPassword="";
     /*
     LInk to the deployed site
      */
-    private String siteLink;
+    private String siteLink="";
 
     public String getSiteTitle() {
         return siteTitle;
@@ -36,12 +36,15 @@ public class PicoSite {
     Will replace plus character with spaces before setting the value
      */
     setSiteTitle(String siteTitle) {
+        if(siteTitle!=null){
         this.siteTitle =siteTitle.replaceAll(Pattern.quote("+"),
                 Matcher.quoteReplacement(" "));
-    }
+    }}
     public void setUserFullName(String userFullName) {
-        this.userFullName =userFullName.replaceAll(Pattern.quote("+"),
-                Matcher.quoteReplacement(" "));
+        if(userFullName!=null) {
+            this.userFullName = userFullName.replaceAll(Pattern.quote("+"),
+                    Matcher.quoteReplacement(" "));
+        }
     }
 
 
@@ -55,7 +58,9 @@ public class PicoSite {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        if(userEmail !=null) {
+            this.userEmail = userEmail;
+        }
     }
 
     public String getSiteLink() {
@@ -63,8 +68,9 @@ public class PicoSite {
     }
 
     public void setSiteLink(String siteLink) {
+        if (siteLink !=null){
         this.siteLink = siteLink;
-    }
+    }}
 
     public String getUserFullName() {
         return userFullName;

@@ -1,7 +1,10 @@
 package de.tinysite.pico.cloud.services;
 
 import de.tinysite.pico.cloud.dto.PicoSite;
+import org.flowable.engine.delegate.DelegateExecution;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public interface PicoProvisioningService {
@@ -16,5 +19,13 @@ public interface PicoProvisioningService {
 
  */
     public void deploy(PicoSite picoSite, String instanceName);
+    public void restartExecution(DelegateExecution execution);
+
+    public List<String>   checkForMissing(DelegateExecution execution);
+
+    public List<String> getErrors();
+
+    public void addError(String error);
+    public void addErrors(List<String> errors);
 
 }

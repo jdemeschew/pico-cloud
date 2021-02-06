@@ -1,5 +1,10 @@
 package de.tinysite.flufl.plesk.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tinysite.flufl.plesk.rest.auth.ApiKeyAuth;
+import de.tinysite.flufl.plesk.rest.auth.Authentication;
+import de.tinysite.flufl.plesk.rest.auth.HttpBasicAuth;
+import de.tinysite.flufl.plesk.rest.auth.OAuth;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
@@ -7,19 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.InvalidMediaTypeException;
-import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
+import org.springframework.http.*;
 import org.springframework.http.RequestEntity.BodyBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -27,46 +27,23 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.threeten.bp.*;
-import com.fasterxml.jackson.datatype.threetenbp.ThreeTenModule;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TimeZone;
-
-import de.tinysite.flufl.plesk.rest.auth.Authentication;
-import de.tinysite.flufl.plesk.rest.auth.HttpBasicAuth;
-import de.tinysite.flufl.plesk.rest.auth.ApiKeyAuth;
-import de.tinysite.flufl.plesk.rest.auth.OAuth;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-01-12T19:08:34.912+01:00")
 @Component("de.tinysite.flufl.plesk.rest.ApiClient")
 public class ApiClient {
     private static final Logger logger =LoggerFactory.getLogger(ApiClient.class);
-    @Value("${plesk-api.base.path}")
+    @Value("${plesk-api.base.path:}")
     private String basePath="";
-    @Value("${plesk-api.user}")
+    @Value("${plesk-api.user:}")
     private String userName="";
-    @Value("${plesk-api.password}")
+    @Value("${plesk-api.password:}")
     private String password="";
     public enum CollectionFormat {
         CSV(","), TSV("\t"), SSV(" "), PIPES("|"), MULTI(null);

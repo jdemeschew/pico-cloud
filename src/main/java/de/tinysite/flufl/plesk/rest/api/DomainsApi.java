@@ -1,32 +1,22 @@
 package de.tinysite.flufl.plesk.rest.api;
 
 import de.tinysite.flufl.plesk.rest.ApiClient;
-
-import de.tinysite.flufl.plesk.rest.dto.Client;
-import de.tinysite.flufl.plesk.rest.dto.CreatedResponse;
-import de.tinysite.flufl.plesk.rest.dto.DomainRequest;
-import de.tinysite.flufl.plesk.rest.dto.DomainResponse;
-import de.tinysite.flufl.plesk.rest.dto.DomainStatus;
-import de.tinysite.flufl.plesk.rest.dto.ErrorResponse;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import de.tinysite.flufl.plesk.rest.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DomainsApi {
     private ApiClient apiClient;

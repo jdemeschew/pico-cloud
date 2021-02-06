@@ -38,13 +38,6 @@
 
     <!-- JSON processing: jackson -->
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${spring-web-version}</version>
-    </dependency>
-
-    <!-- JSON processing: jackson -->
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
       <version>${jackson-version}</version>
@@ -173,8 +166,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>8</source>
-          <target>8</target>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
       <plugin>
@@ -187,7 +180,7 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>${project.basedir}/src/main/resouces/plesk.json</inputSpec>
+              <inputSpec>${project.basedir}/src/main/resources/plesk.json</inputSpec>
               <output>${project.basedir}</output>
               <language>java</language>
               <library>resttemplate</library>
@@ -203,6 +196,13 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+        </configuration>
       </plugin>
     </plugins>
   </build>

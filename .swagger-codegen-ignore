@@ -23,4 +23,3 @@ src/main/java/de/tinysite/flufl/plesk/rest/dto/DomainResponse.java
 src/main/java/de/tinysite/flufl/plesk/rest/api/DomainsApi.java
 
 # Then explicitly reverse the ignore rule for a single file:
-!docs/SecretKeyRequest.md
