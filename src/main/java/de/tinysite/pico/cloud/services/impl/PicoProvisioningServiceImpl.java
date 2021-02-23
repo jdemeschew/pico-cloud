@@ -44,6 +44,8 @@ public class PicoProvisioningServiceImpl implements PicoProvisioningService {
     private String picoTemplateLocation="";
     @Value("${send-invitation-mail}")
     private Boolean sendInvitationMail;
+    @Value("${localhost.base-url}")
+    private String localhostBaseUrl;
 
 
 
@@ -106,7 +108,7 @@ if(sendInvitationMail &&StringUtils.isBlank(picoSite.getUserEmail())){
             Map<String,String>  params= new HashMap();
             params.put("site_title", picoSite.getSiteTitle());
             configureInstance(sitePath.toString(),params);
-            String link ="https://" + siteName+".tinysite.de";
+            String link ="https://" +localhostBaseUrl+siteName;
             configureInstance(sitePath.toFile().getAbsolutePath(),params);
             String content = String.format(PICO_WELCOME_EMAIL,picoSite.getUserFullName(),link);
 
